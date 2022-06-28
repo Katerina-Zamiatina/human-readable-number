@@ -34,16 +34,37 @@ module.exports = function toReadable(number) {
         "ninety",
     ];
     let readable;
+
+    if (number === 0) {
+        return "zero"
+    }
+
     if (number < 20) {
         readable = toTwenty[number];
-        return readable;
+        return readable.trim();
     }
-    if (number > 20) {
+    if (number >= 20 && number < 100) {
         let n = number.toString().split("");
-        console.log("n: ", n);
         readable = tens[n[0]] + " " + toTwenty[n[1]];
 
-        return readable;
+        return readable.trim();
     }
-    return readable;
+    if (number >= 100) {
+        let n = number.toString().split("");
+        let firstTens = Number(n[1] + n[2]);
+        if (n[1] === "1") {
+            readable = toTwenty[n[0]] + " hundred " + toTwenty[firstTens];
+            return readable.replace(/\s+/g, " ").trim();
+        } else {
+            readable =
+                toTwenty[n[0]] +
+                " hundred " +
+                tens[n[1]] +
+                " " +
+                toTwenty[n[2]];
+            console.log("readable ", readable);
+            return readable.replace(/\s+/g, " ").trim();
+        }
+    }
+    return readable.trim();
 };
