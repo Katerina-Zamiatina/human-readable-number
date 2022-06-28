@@ -51,9 +51,9 @@ module.exports = function toReadable(number) {
     }
     if (number >= 100) {
         let n = number.toString().split("");
-        let firstTens = Number(n[1] + n[2]);
+        let firstTen = Number(n[1] + n[2]);
         if (n[1] === "1") {
-            readable = toTwenty[n[0]] + " hundred " + toTwenty[firstTens];
+            readable = toTwenty[n[0]] + " hundred " + toTwenty[firstTen];
             return readable.replace(/\s+/g, " ").trim();
         } else {
             readable =
@@ -62,9 +62,8 @@ module.exports = function toReadable(number) {
                 tens[n[1]] +
                 " " +
                 toTwenty[n[2]];
-            console.log("readable ", readable);
             return readable.replace(/\s+/g, " ").trim();
         }
     }
-    return readable.trim();
+    return readable;
 };
